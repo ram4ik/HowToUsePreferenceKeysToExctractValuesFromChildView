@@ -43,9 +43,20 @@ struct ContentView_Previews: PreviewProvider {
 struct SecondaryScreen: View {
     
     let text: String
+    @State private var newValue: String = ""
     
     var body: some View {
         Text(text)
+            .onAppear {
+                getDataFromDatabase()
+            }
+            .customTitle(newValue)
+    }
+    
+    func getDataFromDatabase() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.newValue = "NEW VALUE FROM DB"
+        }
     }
 }
 
