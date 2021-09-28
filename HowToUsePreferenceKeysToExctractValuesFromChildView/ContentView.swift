@@ -16,12 +16,21 @@ struct ContentView: View {
             VStack {
                 SecondaryScreen(text: text)
                     .navigationTitle("Navigation Title")
-                    .preference(key: CustomTitlePreferenceKey.self, value: "NEW VALUE")
+                    .customTitle("New Value")
+                    //.preference(key: CustomTitlePreferenceKey.self, value: "NEW VALUE")
             }
         }
         .onPreferenceChange(CustomTitlePreferenceKey.self) { value in
             self.text = value
         }
+    }
+}
+
+extension View {
+    
+    func customTitle(_ text: String) -> some View {
+        self
+            .preference(key: CustomTitlePreferenceKey.self, value: text)
     }
 }
 
